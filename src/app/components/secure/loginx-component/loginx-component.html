@@ -1,0 +1,15 @@
+<div class="card w-96 bg-base-100 card-md shadow-sm" style="margin: auto">
+  <div class="card-body">
+    <h2 class="card-title">Login</h2>
+    <div class="divider divider-neutral" style="margin: 0"></div>
+    <fieldset class="fieldset">
+      <label class="label">Email</label>
+      <input type="text" [(ngModel)]="formData.usuario" placeholder="Email" class="input input-md mb-2" />
+      <label class="label">Clave</label>
+      <input type="password" [(ngModel)]="formData.clave" placeholder="Clave" class="input input-md" />
+    </fieldset>
+    <div class="justify-end card-actions">
+      <app-btnlod-component [btnSpinner]="showSpin()" (clickSend)="login()"></app-btnlod-component>
+    </div>
+  </div>
+</div>

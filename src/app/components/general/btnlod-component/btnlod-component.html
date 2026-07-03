@@ -1,0 +1,9 @@
+<button class="btn btn-primary bg-red-500 text-white" [disabled]="btnSpinner" (click)="sendAction()">
+  @if (!btnSpinner) {
+    <svg [lucideIcon]="iconType"></svg>
+  }
+  @if (btnSpinner) {
+    <span class="loading loading-spinner"></span>
+  }
+  {{ btnLabel }}
+</button>

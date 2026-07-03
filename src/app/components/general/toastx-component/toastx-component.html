@@ -1,0 +1,13 @@
+@if (toastService.toast().show) {
+  <div class="toast toast-top toast-end">
+    <div
+      class="alert"
+      [class.alert-success]="toastService.toast().type === 'success'"
+      [class.alert-error]="toastService.toast().type === 'error'"
+      [class.alert-warning]="toastService.toast().type === 'warn'"
+      [class.alert-info]="toastService.toast().type === 'info'"
+    >
+      <svg [lucideIcon]="iconType"></svg> {{ toastService.toast().message }}
+    </div>
+  </div>
+}

@@ -1,0 +1,37 @@
+<div class="overflow-x-auto list-height">
+  <table class="table table-zebra table-pin-rows table-md">
+    <thead>
+      <tr>
+        @for (col of nameCols; track col.key) {
+          <th>{{ col.label }}</th>
+        }
+      </tr>
+    </thead>
+    <tbody>
+      @for (row of dataRows; track $index) {
+        <tr>
+          @for (col of nameCols; track col.key) {
+            @if (col.key == 'estado') {
+              <td>
+                <app-switch-component
+                  [checkValue]="$any(row)[col.key]"
+                  (clickSend)="sendEmitConfirm($event)"
+                ></app-switch-component>
+              </td>
+            } @else {
+              <td>{{ $any(row)[col.key] }}</td>
+            }
+          }
+          <td>
+            <app-btnlod-component
+              [btnSpinner]="btnSpinner"
+              [btnLabel]="'Editar'"
+              [btnIcon]="'EDIT'"
+              (clickSend)="sendEmitCode(row)"
+            ></app-btnlod-component>
+          </td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</div>

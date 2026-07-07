@@ -1,10 +1,11 @@
 import { Component, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 // Componentes propios
 import { BtnlodComponent } from '../../general/btnlod-component/btnlod-component';
 import { timeout, finalize } from 'rxjs';
 // Interfaces
-import { ILogin } from '../../../interfaces/ILogin';
+import { ILogin, ILoginResponse } from '../../../interfaces/ILogin';
 import { IResponse } from '../../../interfaces/IResponse';
 // Servicios
 import { LoginService } from '../../../services/login-service';
@@ -20,14 +21,15 @@ export class LoginxComponent {
   // Servicios
   private loginService = inject(LoginService);
   private toast = inject(ToastService);
+  private router = inject(Router);
 
   // Variables
   showSpin = signal(false);
 
   // Objetos
   formData: ILogin = {
-    usuario: '',
-    clave: '',
+    usuario: 'orlenisma@hotmail.com',
+    clave: '12345',
   };
 
   login = () => {
@@ -39,8 +41,10 @@ export class LoginxComponent {
         finalize(() => this.showSpin.set(false)),
       )
       .subscribe({
-        next: (res: IResponse) => {
-              this.toast.show('Sesión Iniciada', 'success');
+        next: (res: IResponse<ILoginResponse[]>) => {
+          this.toast.show(res.message, 'success');
+          sessionStorage.setItem('usrName', res.data[0].usuario);
+          this.router.navigate(['/dashboard']);
         },
         error: (err) => {
           console.log(err);

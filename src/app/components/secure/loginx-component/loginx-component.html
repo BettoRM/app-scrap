@@ -9,7 +9,7 @@
       <input type="password" [(ngModel)]="formData.clave" placeholder="Clave" class="input input-md" />
     </fieldset>
     <div class="justify-end card-actions">
-      <app-btnlod-component [btnSpinner]="showSpin()" (clickSend)="login()"></app-btnlod-component>
+      <app-btnlod-component [btnSpinner]="showSpin()" [btnLabel]="'Ingresar'" (clickSend)="login()"></app-btnlod-component>
     </div>
   </div>
 </div>

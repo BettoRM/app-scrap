@@ -1,0 +1,14 @@
+@if (confirmModal.visible()) {
+  <dialog id="my_modal_1" class="modal modal-open">
+    <div class="modal-box">
+      <h3 class="text-lg font-bold">{{ confirmModal.title() }}</h3>
+      <p class="py-4">{{ confirmModal.message() }}</p>
+      <div class="modal-action">
+        <form method="dialog">
+          <button class="btn btn-success mr-3" (click)="confirmModal.accept()">SI</button>
+          <button class="btn btn-neutral" (click)="confirmModal.cancel()">NO</button>
+        </form>
+      </div>
+    </div>
+  </dialog>
+}

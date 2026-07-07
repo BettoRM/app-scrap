@@ -1,0 +1,8 @@
+<app-list-component
+  [nameKeys]="nameKeys"
+  [nameCols]="nameCols"
+  [dataRows]="dataRows()"
+  [btnSpinner]="showEditSpin()"
+  (clickConfirm)="mostrar($event)"
+  (clickAction)="editar($event)"
+></app-list-component>

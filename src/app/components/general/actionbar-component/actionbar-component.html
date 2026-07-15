@@ -1,0 +1,28 @@
+<div class="navbar bg-base-100 shadow-sm mb-3">
+  <button type="button" class="btn btn-primary mr-1" (click)="move()">
+    <svg lucidePlus></svg>
+    NUEVO
+  </button>
+  <label class="input">
+    <svg class="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+      <g
+        stroke-linejoin="round"
+        stroke-linecap="round"
+        stroke-width="2.5"
+        fill="none"
+        stroke="currentColor"
+      >
+        <circle cx="11" cy="11" r="8"></circle>
+        <path d="m21 21-4.3-4.3"></path>
+      </g>
+    </svg>
+    <input
+      #txtSearch
+      id="txtSearch"
+      type="text"
+      (keydown.enter)="filter(txtSearch.value)"
+      placeholder="Ingrese texto a buscar"
+      autocomplete="off"
+    />
+  </label>
+</div>

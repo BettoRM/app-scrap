@@ -16,8 +16,9 @@ export class ListComponent {
   @Input() nameCols: IColumn[] = [];
   @Input() dataRows: TableRow[] = [];
   @Input() btnSpinner: boolean = false;
+  @Input() dataSpinner: boolean = false;
 
-  @Output() clickConfirm = new EventEmitter<boolean>();
+  @Output() clickConfirm = new EventEmitter<Record<string, unknown> | null>();
   @Output() clickAction = new EventEmitter<Record<string, unknown>>();
 
   // Variables
@@ -25,7 +26,21 @@ export class ListComponent {
 
   getValues = (row: TableRow): unknown[] => Object.values(row);
 
-  sendEmitConfirm = (result: boolean) => this.clickConfirm.emit(result);
+  // Confirmacion toggle
+  sendEmitConfirm = (event: boolean, row: object) => {
+    let codes = null;
+    if (event) {
+      const currentRow = row as Record<string, unknown>;
+
+      codes = this.nameKeys.reduce<Record<string, unknown>>((acc, key) => {
+        acc[key] = currentRow[key];
+        return acc;
+      }, {});
+    }
+    this.clickConfirm.emit(codes);
+  };
+
+  // Boton de edicion
   sendEmitCode = (row: object) => {
     const currentRow = row as Record<string, unknown>;
 

@@ -1,17 +1,16 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
 import { inject, Service } from '@angular/core';
-import { API_URL } from '../clases/apiConfig';
-// Interfaces
+import { IPlanForm, IPlanResponseList } from '../interfaces/IPlan';
 import { IRequestList } from '../interfaces/IRequest';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { IResponse } from '../interfaces/IResponse';
-import { IUsuarioForm, IUsuarioResponseList } from '../interfaces/IUsuario';
+import { API_URL } from '../clases/apiConfig';
 
 @Service()
-export class UsuarioService {
+export class PlanService {
   private httpClient = inject(HttpClient);
-  private NAMEENDPOINT: string = 'usuario';
+  private NAMEENDPOINT: string = 'plan';
 
-  queryUsuario<T extends IUsuarioResponseList[] | IUsuarioForm[]>(data: IRequestList) {
+  queryPlan<T extends IPlanResponseList[] | IPlanForm[]>(data: IRequestList) {
     let paramsQuery = new HttpParams();
 
     Object.entries(data).forEach(([key, value]) => {
@@ -26,7 +25,7 @@ export class UsuarioService {
     });
   }
 
-  newUsuario(data: IUsuarioForm) {
+  newPlan(data: IPlanForm) {
     return this.httpClient.post<IResponse<[]>>(
       `${API_URL}${this.NAMEENDPOINT}`,
       JSON.stringify(data),
@@ -37,7 +36,7 @@ export class UsuarioService {
     );
   }
 
-  editUsuario(data: IUsuarioForm) {
+  editPlan(data: IPlanForm) {
     return this.httpClient.put<IResponse<[]>>(
       `${API_URL}${this.NAMEENDPOINT}`,
       JSON.stringify(data),
@@ -48,11 +47,11 @@ export class UsuarioService {
     );
   }
 
-  delUsuario(data: IUsuarioForm) {
+  delPlan(data: IPlanForm) {
+    console.log(JSON.stringify(data));
     return this.httpClient.delete<IResponse<[]>>(`${API_URL}${this.NAMEENDPOINT}`, {
       params: {
         codide: data.codigo,
-        codacc: data.ciclo,
       },
       withCredentials: true,
       observe: 'response',

@@ -6,3 +6,14 @@ export interface IUsuarioResponseList {
   correo: string;
   estado: boolean;
 }
+
+export interface IUsuarioForm {
+  codigo: number;
+  ciclo: number;
+  dni: string;
+  nombre: string;
+  apellido: string;
+  direccion: string;
+  correo: string;
+  passwo:string;
+}

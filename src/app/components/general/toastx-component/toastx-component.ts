@@ -20,7 +20,6 @@ export class ToastxComponent {
   protected toastService = inject(ToastService);
 
   get iconType() {
-    console.log(this.toastService.toast().type);
     return ICONS['CHECK'] ?? LucideCheck;
   }
 }

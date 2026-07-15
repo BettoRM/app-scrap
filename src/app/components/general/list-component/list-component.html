@@ -7,31 +7,54 @@
         }
       </tr>
     </thead>
-    <tbody>
-      @for (row of dataRows; track $index) {
-        <tr>
-          @for (col of nameCols; track col.key) {
-            @if (col.key == 'estado') {
-              <td>
-                <app-switch-component
-                  [checkValue]="$any(row)[col.key]"
-                  (clickSend)="sendEmitConfirm($event)"
-                ></app-switch-component>
-              </td>
-            } @else {
-              <td>{{ $any(row)[col.key] }}</td>
+    @if (!dataSpinner) {
+      <tbody>
+        @for (row of dataRows; track $index) {
+          <tr>
+            @for (col of nameCols; track col.key) {
+              @if (col.key == 'estado') {
+                <td>
+                  <app-switch-component
+                    [checkValue]="$any(row)[col.key]"
+                    (clickSend)="sendEmitConfirm($event, row)"
+                  ></app-switch-component>
+                </td>
+              } @else if (typeof $any(row)[col.key] === 'boolean') {
+                <td>
+                  <input
+                    type="checkbox"
+                    [checked]="$any(row)[col.key]"
+                    class="checkbox checkbox-accent"
+                    (click)="$event.preventDefault()"
+                  />
+                </td>
+              } @else {
+                <td>{{ $any(row)[col.key] }}</td>
+              }
             }
-          }
-          <td>
-            <app-btnlod-component
-              [btnSpinner]="btnSpinner"
-              [btnLabel]="'Editar'"
-              [btnIcon]="'EDIT'"
-              (clickSend)="sendEmitCode(row)"
-            ></app-btnlod-component>
-          </td>
-        </tr>
-      }
-    </tbody>
+            <td>
+              <app-btnlod-component
+                [btnSpinner]="btnSpinner"
+                [btnLabel]="'Editar'"
+                [btnIcon]="'EDIT'"
+                (clickSend)="sendEmitCode(row)"
+              ></app-btnlod-component>
+            </td>
+          </tr>
+        }
+      </tbody>
+    } @else {
+      <tbody>
+        @for (row of [1, 2, 3]; track row) {
+          <tr>
+            @for (col of nameCols; track col.key) {
+              <td>
+                <div class="skeleton h-4 w-full"></div>
+              </td>
+            }
+          </tr>
+        }
+      </tbody>
+    }
   </table>
 </div>

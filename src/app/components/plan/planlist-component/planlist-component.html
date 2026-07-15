@@ -17,49 +17,39 @@
 @if (showDialog()) {
   <dialog id="my_modal_1" class="modal modal-open">
     <div class="modal-box">
-      <h3 class="text-lg font-bold">Usuario</h3>
+      <h3 class="text-lg font-bold">Planes</h3>
       <div class="divider divider-neutral" style="margin: 0"></div>
       <fieldset class="fieldset">
-        <label class="label">DNI</label>
-        <input
-          type="text"
-          [(ngModel)]="formData().dni"
-          placeholder="Ingrese número de DNI"
-          class="input input-md mb-1"
-          style="width: 100%"
-        />
-        <label class="label">Nombres</label>
+        <label class="label">Nombre</label>
         <input
           type="text"
           [(ngModel)]="formData().nombre"
+          placeholder="Ingrese nombre"
+          class="input input-md mb-1"
+          style="width: 100%"
+        />
+        <label class="label">Precio</label>
+        <input
+          type="text"
+          [(ngModel)]="formData().precio"
           placeholder="Ingrese nombres"
           class="input input-md mb-1"
           style="width: 100%"
         />
-        <label class="label">Apellidos</label>
-        <input
-          type="text"
-          [(ngModel)]="formData().apellido"
-          placeholder="Ingrese apellidos"
-          class="input input-md mb-1"
-          style="width: 100%"
-        />
-        <label class="label">Direccion</label>
-        <input
-          type="text"
-          [(ngModel)]="formData().direccion"
-          placeholder="Ingrese dirección"
-          class="input input-md mb-1"
-          style="width: 100%"
-        />
-        <label class="label">Correo</label>
-        <input
-          type="text"
-          [(ngModel)]="formData().correo"
-          placeholder="Ingrese correo electrónico"
-          class="input input-md mb-1"
-          style="width: 100%"
-        />
+        <div>
+          <label class="label">
+            <input type="checkbox" [(ngModel)]="formData().marca" class="checkbox" />
+            Incluir Marca
+          </label>
+          <label class="label" style="margin-left: 1rem;">
+            <input type="checkbox" [(ngModel)]="formData().tabla" class="checkbox" />
+            Respuesta en Tabla
+          </label>
+          <label class="label" style="margin-left: 1rem;">
+            <input type="checkbox" [(ngModel)]="formData().json" class="checkbox" />
+            Respuesta en JSON
+          </label>
+        </div>
       </fieldset>
       <div class="modal-action">
         <app-btnlod-component

@@ -43,11 +43,13 @@ export class LoginxComponent {
       .subscribe({
         next: (res: IResponse<ILoginResponse[]>) => {
           this.toast.show(res.message, 'success');
+          sessionStorage.setItem('loggedIn', 'true');
+          sessionStorage.setItem('lastAction', Date.now().toString());
           sessionStorage.setItem('usrName', res.data[0].usuario);
           this.router.navigate(['/dashboard']);
         },
         error: (err) => {
-          console.log(err);
+          this.toast.show(err.message, 'error');
         },
       });
   };

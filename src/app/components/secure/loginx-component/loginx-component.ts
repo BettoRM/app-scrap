@@ -10,6 +10,7 @@ import { IResponse } from '../../../interfaces/IResponse';
 // Servicios
 import { LoginService } from '../../../services/login-service';
 import { ToastService } from '../../../services/toast-service';
+import { AuthService } from '../../../services/auth-service';
 
 @Component({
   selector: 'app-loginx-component',
@@ -22,6 +23,7 @@ export class LoginxComponent {
   private loginService = inject(LoginService);
   private toast = inject(ToastService);
   private router = inject(Router);
+  private authService = inject(AuthService);
 
   // Variables
   showSpin = signal(false);
@@ -43,9 +45,7 @@ export class LoginxComponent {
       .subscribe({
         next: (res: IResponse<ILoginResponse[]>) => {
           this.toast.show(res.message, 'success');
-          sessionStorage.setItem('loggedIn', 'true');
-          sessionStorage.setItem('lastAction', Date.now().toString());
-          sessionStorage.setItem('usrName', res.data[0].usuario);
+          this.authService.setLoggedIn(res.data[0].usuario);
           this.router.navigate(['/dashboard']);
         },
         error: (err) => {
